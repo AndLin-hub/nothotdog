@@ -1,27 +1,64 @@
 "use client"
 import axios from 'axios';
 import React from "react"
-
-
-const fileTypes = ["JPG", "PNG", "GIF"];
+import {useState,useEffect} from 'react'
 
 export default function Home() {
-
+  const [file,setFile] = useState(null);
+  const [fileDataURL, setFileDataURL] = useState(null);
+  const [predictions, setPrediction] = useState(null);
+  const [loading, setLoading] = useState(null)
+  const send = async () => await axios.post( "http://localhost:3000/" + "api", file,{
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  }
+).then((response) => console.log(response.data))
+const handleChange = (event) =>{
+  setFile(event.target.files[0])
+  send()
+}
+  useEffect(() => {
+    let fileReader, isCancel = false;
+    if (file) {
+      fileReader = new FileReader();
+      fileReader.onload = (e) => {
+        const { result } = e.target;
+        if (result && !isCancel) {
+          setFileDataURL(result)
+        }
+      }
+      fileReader.readAsDataURL(file);
+    }
+    return () => {
+      isCancel = true;
+      if (fileReader && fileReader.readyState === 1) {
+        fileReader.abort();
+      }
+    }
+  }, [file]);
 
   return (
-    <div className="flex items-center flex-col h-[100vh] bg-sky-300">
+
+    <div className="flex items-center flex-col h-screen bg-sky-300 overflow-auto">
       <h1 className="font-sans text-[4vw] text-white rounded-xl mt-[2vh] p-[1vw]">
         not hotdog
       </h1>
-      <p className="font-sans text-[1.3vw] text-white mt-[0.2vh] mb-[2vh]">
+      <p className="font-sans text-[1vw] text-white mt-[0.2vh] mb-[2vh]">
         Image classification AI used to determine if a image is a hotdog or not hotdog
       </p>
-      <label className="bg-white text-sky-300 p-[0.2vw] rounded-xl hover:text-sky-500">
+      <label className="bg-white text-sky-300 p-[0.2vw] rounded-xl hover:text-sky-500 mb-[2vh]" >
         Upload image
-        <input type="file" className="hidden" >
+        <input type="file" className="hidden"  accept="image/*" onChange={handleChange}>
         </input>
       </label>
-      
+      {fileDataURL ?
+        <p className="h-[10vh] w-[15vw] flex items-center flex-col">
+          {
+            <img src={fileDataURL} alt="preview" />
+          }
+        </p> : null}
     </div>
+
   )
 }
