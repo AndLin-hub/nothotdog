@@ -8,18 +8,25 @@ export default function Home() {
   const [fileDataURL, setFileDataURL] = useState(null);
   const [predictions, setPrediction] = useState(null);
   const [loading, setLoading] = useState(null)
-  const send = async () => await axios.post( "http://localhost:3000/" + "api", file,{
+  const send = async (formData:FormData) => await axios.post("/api", formData,{
     headers: {
       'Content-Type': 'multipart/form-data'
     }
   }
-).then((response) => console.log(response.data))
-const handleChange = (event) =>{
-  setFile(event.target.files[0])
-  send()
-}
+  ).then((response) => {
+  setPrediction(Math.round(response.data*100))})
+
+  const handleChange = async (event:Event) =>{
+    setFile(event.target.files[0])
+    const formData = new FormData()
+    formData.append("file", event.target.files[0])
+    setLoading(true)
+    await send(formData)
+    setLoading(false)
+  }
+
   useEffect(() => {
-    let fileReader, isCancel = false;
+    let fileReader:FileReader, isCancel = false;
     if (file) {
       fileReader = new FileReader();
       fileReader.onload = (e) => {
@@ -58,7 +65,16 @@ const handleChange = (event) =>{
             <img src={fileDataURL} alt="preview" />
           }
         </p> : null}
-    </div>
+      
+      {file && loading ?
+      <div className="relative mt-[20vh]">
+        Loading
+      </div>
+
+      : <div className="relative mt-[20vh]">
+      {predictions}% of being a hotdog
+    </div>}
+    </div>  
 
   )
 }

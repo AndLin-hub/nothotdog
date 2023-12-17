@@ -1,17 +1,26 @@
 import axios from "axios"
-import { collectGenerateParams } from "next/dist/build/utils"
 
 export async function POST(request:Request){
-  const res = await axios.post(process.env.url, request,{
+  const log = await request.formData()
+  const res = await axios.post(process.env.url, log,{
     headers: {
       'Content-Type': 'multipart/form-data'
     }
   })
-  console.log(res)
-  return new Response(JSON.stringify({hello: "cool karina"}))
+  .then((response) => {
+    return response.data.prediction
+  })
+  .catch((error) => {
+    console.log(error.response)
+  })
+  return new Response(res)
 }
 
 export async function GET(request: Request){
-  console.log("hello")
-    return new Response(JSON.stringify({Hello:"Hello world"}))
+  const res = await axios.get(process.env.url)
+  .then((response) => {
+    return response.data
+  })
+
+  return new Response(res)
 }
