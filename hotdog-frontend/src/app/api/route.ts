@@ -2,7 +2,7 @@ import axios from "axios"
 
 export async function POST(request:Request){
   const log = await request.formData()
-  const res = await axios.post(process.env.url, log,{
+  const res = await axios.post(process.env.url!, log,{
     headers: {
       'Content-Type': 'multipart/form-data'
     }
@@ -17,7 +17,7 @@ export async function POST(request:Request){
 }
 
 export async function GET(request: Request){
-  const res = await axios.get(process.env.url)
+  const res = await axios.get(process.env.url!)
   .then((response) => {
     return response.data
   })

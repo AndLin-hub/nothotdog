@@ -4,10 +4,10 @@ import React from "react"
 import {useState,useEffect} from 'react'
 
 export default function Home() {
-  const [file,setFile] = useState(null);
+  const [file,setFile] = useState<File|null>(null);
   const [fileDataURL, setFileDataURL] = useState(null);
-  const [predictions, setPrediction] = useState(null);
-  const [loading, setLoading] = useState(null)
+  const [predictions, setPrediction] = useState<number|null>(null);
+  const [loading, setLoading] = useState<boolean|null>(null)
   const send = async (formData:FormData) => await axios.post("/api", formData,{
     headers: {
       'Content-Type': 'multipart/form-data'
@@ -16,20 +16,20 @@ export default function Home() {
   ).then((response) => {
   setPrediction(Math.round(response.data*100))})
 
-  const handleChange = async (event:Event) =>{
-    setFile(event.target.files[0])
+  const handleChange = async (event:Event |any) =>{
+    setFile(event.target!.files[0])
     const formData = new FormData()
-    formData.append("file", event.target.files[0])
+    formData.append("file", event.target!.files[0])
     setLoading(true)
     await send(formData)
     setLoading(false)
   }
 
   useEffect(() => {
-    let fileReader:FileReader, isCancel = false;
+    let fileReader:FileReader|any, isCancel = false;
     if (file) {
       fileReader = new FileReader();
-      fileReader.onload = (e) => {
+      fileReader.onload = (e:Event |any) => {
         const { result } = e.target;
         if (result && !isCancel) {
           setFileDataURL(result)
