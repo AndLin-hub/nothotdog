@@ -66,14 +66,16 @@ export default function Home() {
           }
         </p> : null}
       
-      {file && loading ?
-      <div className="relative mt-[20vh]">
+      {file ? 
+      <div>
+      { loading && <div className="relative mt-[20vh]">
         Loading
-      </div>
-
-      : <div className="relative mt-[20vh]">
+      </div>}
+      {!loading && <div className="relative mt-[20vh]">
       {predictions}% of being a hotdog
-    </div>}
+      </div>}
+      </div>
+      : null}
     </div>  
 
   )
