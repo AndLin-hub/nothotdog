@@ -69,10 +69,10 @@ export default function Home() {
       
       {file ? 
       <div>
-      { loading && <div className="relative mt-[20vh]">
+      { loading && <div className="relative mt-[20vh] bg-white text-sky-500 rounded-xl p-[0.2vw]">
         Loading
       </div>}
-      {!loading && <div className="relative mt-[20vh]">
+      {!loading && <div className="relative mt-[20vh] bg-white text-sky-500 rounded-xl p-[0.2vw]">
       {predictions}% of being a hotdog
       </div>}
       </div>
