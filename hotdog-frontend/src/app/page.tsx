@@ -54,7 +54,7 @@ export default function Home() {
       <p className="font-sans text-[1vw] text-white mt-[0.2vh] mb-[2vh] flex items-center">
         Based on https://www.youtube.com/watch?v=vIci3C4JkL0&ab_channel=vietanhle <br/>
         Image classification AI used to determine if a image is a hotdog or not hotdog <br/>
-        Currently not functional as vercel blocks api calls lopnger than 10secs  and the model requires about 30secs to predict images. <br/>
+        Currently not functional as vercel blocks api calls longer than 10 secs and the model requires about 30secs to predict images. <br/>
       </p>
       <label className="bg-white text-sky-300 p-[0.2vw] rounded-xl hover:text-sky-500 mb-[2vh]" >
         Upload image
