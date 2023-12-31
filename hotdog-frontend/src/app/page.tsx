@@ -47,16 +47,14 @@ export default function Home() {
 
   return (
 
-    <div className="flex items-center flex-col h-screen bg-sky-300 overflow-auto">
-      <h1 className="font-sans text-[4vw] text-white rounded-xl mt-[2vh] p-[1vw]">
+    <div className="flex items-center flex-col h-screen overflow-auto">
+      <h1 className="font-sans text-[4vw] text-violet-500 rounded-xl mt-[2vh] p-[1vw]">
         not hotdog
       </h1>
       <p className="font-sans text-[1vw] text-black mt-[0.2vh] mb-[2vh] flex items-center">
-        Based on https://www.youtube.com/watch?v=vIci3C4JkL0&ab_channel=vietanhle <br/>
-        Image classification AI used to determine if a image is an hotdog or not hotdog <br/>
-        Currently not functional as vercel blocks api calls longer than 10 secs and the model requires about 30 secs to predict images. <br/>
+        Image classification AI used to determine if a image is an hotdog or not hotdog. Currently not working as vercel blocks long api calls.
       </p>
-      <label className="bg-white text-sky-300 p-[0.2vw] rounded-xl hover:text-sky-500 mb-[2vh]" >
+      <label className=" text-black p-[0.2vw] rounded-xl hover:text-sky-500 mb-[2vh]" >
         Upload image
         <input type="file" className="hidden"  accept="image/*" onChange={handleChange}>
         </input>
@@ -70,10 +68,10 @@ export default function Home() {
       
       {file ? 
       <div>
-      { loading && <div className="relative mt-[20vh] bg-white text-sky-500 rounded-xl p-[0.2vw]">
+      { loading && <div className="relative mt-[20vh]  text-sky-500 rounded-xl p-[0.2vw]">
         Loading
       </div>}
-      {!loading && <div className="relative mt-[20vh] bg-white text-sky-500 rounded-xl p-[0.2vw]">
+      {!loading && <div className="relative mt-[20vh]  text-sky-500 rounded-xl p-[0.2vw]">
       {predictions}% of being a hotdog
       </div>}
       </div>
