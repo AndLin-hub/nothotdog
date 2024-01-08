@@ -15,13 +15,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
+    
     <html lang="en">
-      <body className={`${inter.className} bg-gray-10`}>
-    <div className="absolute top-[10vh] left-[30vw] h-[30rem] w-[30rem] bg-blue-700 blur-[30rem] rounded-full opacity-100"/>
-        <div className="absolute top-[10vh] left-[85vw] h-[30rem] w-[30rem] bg-red-700 blur-[30rem] rounded-full opacity-100"/>
-        <div className="absolute top-[60vh] left-[10vw] h-[30rem] w-[30rem] bg-violet-700 blur-[30rem] rounded-full opacity-100"/>
+      <body className={`${inter.className} bg-gray-10 z-50 relative`}>
         {children}
-        </body>
+        <div className="absolute top-[10vh] left-[30vw] h-[30rem] w-[30rem] bg-blue-700 blur-[30rem] rounded-full opacity-100 -z-10 absolute"/>
+      <div className="absolute top-[10vh] left-[85vw] h-[30rem] w-[30rem] bg-red-700 blur-[30rem] rounded-full opacity-100 -z-10 absolute"/>
+      <div className="absolute top-[60vh] left-[10vw] h-[30rem] w-[30rem] bg-violet-700 blur-[30rem] rounded-full opacity-100 -z-10 absolute"/>
+      </body>
     </html>
   )
 }
