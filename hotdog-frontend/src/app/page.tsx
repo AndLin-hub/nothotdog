@@ -54,7 +54,7 @@ export default function Home() {
       <p className="font-sans text-[1vw] text-black mt-[0.2vh] mb-[2vh] flex items-center">
         Image classification AI used to determine if a image is an hotdog or not hotdog. Currently not working as vercel blocks long api calls.
       </p>
-      <label className=" text-black p-[0.2vw] rounded-xl hover:text-sky-500 mb-[2vh]" >
+      <label className=" text-white p-[0.2vw] rounded-xl mb-[2vh] bg-violet-400 shadow-violet-400/40 shadow-xl hover:opacity-75" >
         Upload image
         <input type="file" className="hidden"  accept="image/*" onChange={handleChange}>
         </input>
@@ -68,10 +68,10 @@ export default function Home() {
       
       {file ? 
       <div>
-      { loading && <div className="relative mt-[20vh]  text-sky-500 rounded-xl p-[0.2vw]">
+      { loading && <div className="relative text-sky-500 rounded-xl p-[0.2vw]">
         Loading
       </div>}
-      {!loading && <div className="relative mt-[20vh]  text-sky-500 rounded-xl p-[0.2vw]">
+      {!loading && <div className="relative text-sky-500 rounded-xl p-[0.2vw]">
       {predictions}% of being a hotdog
       </div>}
       </div>
